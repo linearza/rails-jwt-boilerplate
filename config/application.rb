@@ -23,6 +23,7 @@ module GenericRailsApi
     # -- all .rb files in that directory are automatically loaded.
 
     config.autoload_paths << Rails.root.join('lib')
+    config.eager_load_paths << Rails.root.join('lib')
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
