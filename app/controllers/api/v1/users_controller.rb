@@ -21,7 +21,8 @@ class Api::V1::UsersController < ApplicationController
   # GET /users/:id
   def show
     @user = User.find(params[:id])
-    render json: @user
+    hash = UserSerializer.new(@user).serializable_hash
+    render json: hash
 
     # if current_user and current_user.admin?
     #   @user = User.find(params[:id])
