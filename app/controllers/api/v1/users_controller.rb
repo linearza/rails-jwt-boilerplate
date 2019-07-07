@@ -17,6 +17,19 @@ class Api::V1::UsersController < ApplicationController
     authenticate params[:email], params[:password]
   end
 
+
+  # GET /users/:id
+  def show
+    @user = User.find(params[:id])
+    render json: @user
+
+    # if current_user and current_user.admin?
+    #   @user = User.find(params[:id])
+    # else
+    #   redirect_to root_path
+    # end
+  end
+
   private
 
   def authenticate(email, password)

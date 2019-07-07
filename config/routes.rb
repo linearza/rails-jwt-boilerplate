@@ -5,6 +5,9 @@ Rails.application.routes.draw do
       post 'authenticate', to: 'authentication#authenticate'
       post 'register', to: 'users#register'
       post 'login', to: 'users#login'
+
+      resources :users, only: [:show, :index, :create, :update]
+
     end
   end
 end
