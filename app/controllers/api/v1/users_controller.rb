@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_request, only: %i[login register]
+  attr_reader :current_user
 
   # POST /register
   def register
@@ -17,6 +18,11 @@ class Api::V1::UsersController < ApplicationController
     authenticate params[:email], params[:password]
   end
 
+  # GET /users/me
+  def me
+    hash = UserSerializer.new(current_user).serializable_hash
+    render json: hash
+  end
 
   # GET /users/:id
   def show

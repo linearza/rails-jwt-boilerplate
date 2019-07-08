@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post 'register', to: 'users#register'
       post 'login', to: 'users#login'
 
+      get 'users/me', to: 'users#me' # get current_user
       resources :users, only: [:show, :index, :create, :update]
 
     end
