@@ -22,3 +22,12 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+### To do
+
+* User confirmation on register
+
+
+### References
+
+https://www.sitepoint.com/authenticate-your-rails-api-with-jwt-from-scratch/

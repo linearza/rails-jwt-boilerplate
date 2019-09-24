@@ -1,16 +1,16 @@
 class Api::V1::UsersController < ApplicationController
-  skip_before_action :authenticate_request, only: %i[login register]
+  skip_before_action :authenticate_request, only: %i[login create]
   attr_reader :current_user
 
-  # POST /register
-  def register
+  # POST /create
+  def create
     @user = User.create(user_params)
-   if @user.save
-    response = { message: 'User created successfully'}
-    render json: response, status: :created
-   else
-    render json: @user.errors, status: :bad
-   end
+    if @user.save
+      response = { message: 'User created successfully'}
+      render json: response, status: :created
+    else
+      render json: @user.errors.full_messages, status: :bad
+    end
   end
 
   # POST /login
@@ -48,15 +48,16 @@ class Api::V1::UsersController < ApplicationController
         message: 'Login Successful'
       }
     else
-      render json: { error: command.errors }, status: :unauthorized
+      render json: { error: command.errors.full_messages }, status: :unauthorized
     end
   end
 
   def user_params
-    params.permit(
+    params.require(:user).permit(
       :name,
       :email,
-      :password
+      :password,
+      :password_confirmation
     )
   end
 end
