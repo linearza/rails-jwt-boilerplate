@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       get 'users/me', to: 'users#me' # get current_user
       resources :users, only: [:show, :index, :create, :update]
 
+      put '/users/:id/confirm-user', to: 'users#confirm_user', defaults: {format: :json}
+
     end
   end
 end
