@@ -14,7 +14,7 @@ module Api
           end
 
         else
-           render json: { error: command.errors }, status: :unauthorized
+           render json: { error: 'Invalid credentials.'}, status: :unauthorized
         end
       end
     end
