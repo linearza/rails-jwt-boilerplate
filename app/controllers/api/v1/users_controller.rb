@@ -37,6 +37,18 @@ class Api::V1::UsersController < ApplicationController
     # end
   end
 
+  # GET /users
+  def index
+    if !current_user.admin
+      # log out non admin users trying to access other users
+      return render json: { error: 'Not authorised!' }, status: :unauthorized
+    end
+
+    @users = User.all.order('name')
+    hash = UserSerializer.new(@users).serializable_hash
+    render json: hash
+  end
+
   private
 
   def authenticate(email, password)
