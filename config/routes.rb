@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :users, only: [:show, :index, :create, :update]
 
       put '/users/:id/confirm-user', to: 'users#confirm_user', defaults: {format: :json}
+      put '/users/:id/deconfirm-user', to: 'users#deconfirm_user', defaults: {format: :json}
 
     end
   end

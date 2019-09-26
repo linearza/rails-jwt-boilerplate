@@ -61,6 +61,14 @@ class Api::V1::UsersController < ApplicationController
     render json: hash
   end
 
+  def deconfirm_user
+    @user.confirmed = false
+    @user.save!
+
+    hash = UserSerializer.new(@user).serializable_hash
+    render json: hash
+  end
+
 
   private
 
